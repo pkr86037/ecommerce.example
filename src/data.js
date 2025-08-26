@@ -24,3 +24,5 @@ export const user = [
   { id: 23, name: "Makeup Kit", category: "Beauty", price: 2499, inStock: false, rating: 4.1, image: "https://via.placeholder.com/150" },
   { id: 24, name: "Sunglasses", category: "Accessories", price: 899, inStock: true, rating: 4.5, image: "https://via.placeholder.com/150" }
 ];
+
+
