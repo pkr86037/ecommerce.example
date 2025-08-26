@@ -1,8 +1,9 @@
-import { FaSearch, FaRegUserCircle } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { CiShop } from "react-icons/ci";
 import { FaRegStar } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
+import { MdKeyboardArrowDown,MdOutlineShoppingCart } from "react-icons/md";
+import { BsShop } from "react-icons/bs";
+import { CiMenuKebab } from "react-icons/ci";
+import { IoIosSearch } from "react-icons/io";
 import { user } from "./data";
 import { MdDelete } from "react-icons/md";
 
@@ -55,6 +56,28 @@ function App() {
 
   return (
     <>
+    <header>
+      <div className="nav-logo">
+        <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fkheaderlogo_exploreplus-44005d.svg" alt=""/>
+      </div>
+      <div className="input-search">
+        <input type="text" placeholder="Search for Products, brand and More"/>
+        <IoIosSearch />
+      </div>
+    
+      <div className="login">
+       <FaRegUserCircle /> Login <MdKeyboardArrowDown />
+      </div>
+      <div className="cart-value">
+       <MdOutlineShoppingCart /> Cart
+      </div>
+      <div className="seller">
+       <BsShop /> Become a seller
+      </div>
+      <div className="side-option">
+        <CiMenuKebab />
+      </div>
+    </header>
       <div className="cantaner">
         <div className="fristcantaner"></div>
 
@@ -76,7 +99,7 @@ function App() {
                     Rating - {card.rating} <FaRegStar />
                   </p>
 
-                  <button onClick={() => addToCart(card)} disabled={isInCart}>
+                  <button className="add-btn" onClick={() => addToCart(card)} disabled={isInCart}>
                     {isInCart ? "Added" : "Add to Cart"}
                   </button>
                 </div>
@@ -88,7 +111,7 @@ function App() {
         <div className="second">
           <div className="cart">
             <h1>CART VALUE</h1>
-            <ul>
+            <ol>
               {cart.map((item) => (
                 <li key={item.id}>
                   <div className="display-hero">
@@ -96,10 +119,10 @@ function App() {
                       <p>Id {item.id}</p>
                     </div>
                     <div className="hero-name">
-                      <p> Product: {item.name}</p>
+                      <p>{item.name}</p>
                     </div>
                     <div className="hero-price">
-                      <p>Rs {item.price * item.quantity}</p>
+                      <p>Rs/- {item.price * item.quantity}</p>
                     </div>
                     <button
                       disabled={item.quantity === 1}
@@ -118,7 +141,7 @@ function App() {
                   </div>
                 </li>
               ))}
-            </ul>
+            </ol>
 
             <p>
               <b>Total Price: Rs {totalPrice}</b>
