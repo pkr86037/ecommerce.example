@@ -5,7 +5,7 @@ import { CiShop } from "react-icons/ci";
 import { FaRegStar } from "react-icons/fa";
 import { user } from "./data";
 import { MdDelete } from "react-icons/md";
-import Slider from "./slider/slider";
+
 import "./App.css";
 import { useState } from "react";
 
@@ -14,7 +14,6 @@ function App() {
 
   console.log(cart, "cart");
 
-  // ✅ Add to cart
   const addToCart = (card) => {
     const isItemExist = cart.find((item) => item.id === card.id);
 
@@ -28,19 +27,16 @@ function App() {
     }
   };
 
-  // ✅ Remove item completely from cart
   const removeElement = (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
   };
 
-  // ✅ Calculate total
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  // ✅ Increase Qty
   const increaseQty = (id) => {
     const updatedCart = cart.map((item) =>
       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
@@ -48,13 +44,12 @@ function App() {
     setCart(updatedCart);
   };
 
-  // ✅ Decrease Qty + Remove if quantity=0
   const decreaseQty = (id) => {
     const updatedCart = cart
       .map((item) =>
         item.id === id ? { ...item, quantity: item.quantity - 1 } : item
       )
-      .filter((item) => item.quantity > 0); // remove item if qty 0
+      .filter((item) => item.quantity > 0);
     setCart(updatedCart);
   };
 
@@ -65,10 +60,9 @@ function App() {
 
         <div className="hero-section"></div>
 
-        {/* ✅ Product Section */}
         <div className="card-section">
           {user.map((card) => {
-            const isInCart = cart.some((item) => item.id === card.id); // ✅ check if item in cart
+            const isInCart = cart.some((item) => item.id === card.id);
             return (
               <div key={card.id}>
                 <div className="card-div">
@@ -82,11 +76,7 @@ function App() {
                     Rating - {card.rating} <FaRegStar />
                   </p>
 
-                  {/* ✅ Button disable only if in cart */}
-                  <button
-                    onClick={() => addToCart(card)}
-                    disabled={isInCart}
-                  >
+                  <button onClick={() => addToCart(card)} disabled={isInCart}>
                     {isInCart ? "Added" : "Add to Cart"}
                   </button>
                 </div>
@@ -95,7 +85,6 @@ function App() {
           })}
         </div>
 
-        {/* ✅ Cart Section */}
         <div className="second">
           <div className="cart">
             <h1>CART VALUE</h1>
@@ -120,9 +109,12 @@ function App() {
                     </button>{" "}
                     {item.quantity}
                     <button onClick={() => increaseQty(item.id)}>+</button>
-                    
-                    {/* ✅ Delete Button */}
-                    <button className="del-Btn" onClick={() => removeElement(item.id)}><MdDelete /></button>
+                    <button
+                      className="del-Btn"
+                      onClick={() => removeElement(item.id)}
+                    >
+                      <MdDelete />
+                    </button>
                   </div>
                 </li>
               ))}
