@@ -12,8 +12,16 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+ const dadaItems =   localStorage.getItem("dataKey");
+ if(!dadaItems) return [];
+ return JSON.parse(dadaItems);
+  });
   const [searchTerm, setSearchTerm] = useState(""); // search state
+
+
+  // Add Data to local storage
+  localStorage.setItem("dataKey", JSON.stringify(cart))
 
   // Add to cart
   const addToCart = (card) => {
